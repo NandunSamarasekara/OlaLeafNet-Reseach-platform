@@ -9,7 +9,7 @@ Welcome to the main repository for OlaLeafNet. This project is a full-stack plat
 ### Backend
 *   **Language:** Go (Golang)
 *   **Framework:** [Gin](https://gin-gonic.com/) - A fast HTTP web framework for Go.
-*   **Database:** MongoDB (via `go.mongodb.org/mongo-driver/v2`)
+*   **Database:** MongoDB (via `go.mongodb.org/mongo-driver/v2`) and PostgreSQL
 *   **Other Tools:** `godotenv` for environment variable management.
 
 ### Frontend
@@ -73,10 +73,6 @@ olaleafnet/
     ```bash
     npm run dev
     ```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
