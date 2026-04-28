@@ -86,7 +86,7 @@ func (h *Handler) GoogleCallback(c *gin.Context) {
 	}
 
 	// Logic to find or create user
-	accessToken, refreshToken, profileComplete, err := h.handleGoogleAuth(c.Request.Context(), gUser, config)
+	accessToken, refreshToken, profileComplete, err := h.handleGoogleAuth(c.Request.Context(), gUser)
 	if err != nil {
 		shared.Err(c, http.StatusInternalServerError, "auth_error", err.Error())
 		return
@@ -99,7 +99,7 @@ func (h *Handler) GoogleCallback(c *gin.Context) {
 	c.Redirect(http.StatusTemporaryRedirect, redirectURL)
 }
 
-func (h *Handler) handleGoogleAuth(ctx context.Context, gUser GoogleUser, config *shared.Config) (string, string, bool, error) {
+func (h *Handler) handleGoogleAuth(ctx context.Context, gUser GoogleUser) (string, string, bool, error) {
 	return h.service.HandleGoogleAuth(ctx, gUser)
 }
 

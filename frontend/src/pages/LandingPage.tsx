@@ -15,7 +15,7 @@ export function LandingPage() {
           <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-black mb-8 leading-[0.9]">
             RESEARCH<br />
             WITHOUT<br />
-            <span className="text-zinc-200">BOUNDARIES.</span>
+            <span className="text-zinc-600">BOUNDARIES.</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg md:text-xl text-zinc-500 font-medium leading-relaxed mb-12">
             Zosterix is the premier ecosystem for scholars to connect, collaborate on breakthroughs, and find mentorship in a streamlined, minimalist environment.
@@ -23,7 +23,7 @@ export function LandingPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/register">
               <Button size="lg" className="rounded-2xl px-10 py-8 text-lg font-black tracking-tight group">
-                Get Started 
+                Get Started
                 <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>

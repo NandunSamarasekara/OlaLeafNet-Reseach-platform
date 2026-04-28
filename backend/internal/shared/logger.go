@@ -15,29 +15,23 @@ func LoggerMiddleware() gin.HandlerFunc {
 
 		c.Next()
 
-		param := gin.LogFormatterParams{
-			Request: c.Request,
-			Keys:    c.Keys,
-		}
-
-		param.TimeStamp = time.Now()
-		param.Latency = param.TimeStamp.Sub(start)
-		param.ClientIP = c.ClientIP()
-		param.Method = c.Request.Method
-		param.StatusCode = c.Writer.Status()
-		param.ErrorMessage = c.Errors.ByType(gin.ErrorTypePrivate).String()
-		param.BodySize = c.Writer.Size()
+		timeStamp := time.Now()
+		latency := timeStamp.Sub(start)
+		clientIP := c.ClientIP()
+		method := c.Request.Method
+		statusCode := c.Writer.Status()
+		errorMessage := c.Errors.ByType(gin.ErrorTypePrivate).String()
 
 		if raw != "" {
 			path = path + "?" + raw
 		}
 
 		log.Info().
-			Int("status", param.StatusCode).
-			Str("method", param.Method).
+			Int("status", statusCode).
+			Str("method", method).
 			Str("path", path).
-			Str("ip", param.ClientIP).
-			Dur("latency", param.Latency).
-			Msg(param.ErrorMessage)
+			Str("ip", clientIP).
+			Dur("latency", latency).
+			Msg(errorMessage)
 	}
 }

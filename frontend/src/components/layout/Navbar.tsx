@@ -55,6 +55,7 @@ export function Navbar() {
             </div>
           ) : (
             <div className="flex items-center gap-3">
+              <Link to="/dashboard" className="hidden md:block mr-2 text-sm font-bold text-zinc-500 hover:text-black">Dashboard</Link>
               <Button variant="ghost" size="icon" className="rounded-full text-zinc-500">
                 <Bell size={20} />
               </Button>

@@ -28,8 +28,8 @@ func LoadConfig() *Config {
 
 	config := &Config{
 		Port:               getEnv("PORT", "8080"),
-		DatabaseURL:        os.Getenv("DATABASE_URL"),
-		RedisURL:           os.Getenv("REDIS_URL"),
+		DatabaseURL:        getEnv("DATABASE_URL", "postgresql://postgres:123456@localhost:5432/postgres?sslmode=disable"),
+		RedisURL:           getEnv("REDIS_URL", "redis://localhost:6379/0"),
 		JWTSecret:          os.Getenv("JWT_SECRET"),
 		JWTRefreshSecret:   os.Getenv("JWT_REFRESH_SECRET"),
 		GoogleClientID:     os.Getenv("GOOGLE_CLIENT_ID"),

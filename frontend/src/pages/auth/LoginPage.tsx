@@ -51,7 +51,7 @@ export function LoginPage() {
       if (!user.profile_complete) {
         navigate('/profile/setup')
       } else {
-        navigate('/feed')
+        navigate('/dashboard')
       }
     } catch (err: any) {
       const msg = err.response?.data?.error?.message || 'Invalid email or password'

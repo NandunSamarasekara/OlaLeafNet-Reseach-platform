@@ -12,6 +12,10 @@ import { ComingSoonPage } from './pages/ComingSoonPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
 import { MainLayout } from './components/layout/MainLayout'
+import { ResearcherDashboardPage } from './pages/researcher/ResearcherDashboardPage'
+import { AccountSettingsPage } from './pages/profile/AccountSettingsPage'
+
+
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +25,14 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <LandingPage />,
+      },
+      {
+        path: 'dashboard',
+        element: (
+          <ProtectedRoute>
+            <ResearcherDashboardPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'feed',
@@ -41,6 +53,38 @@ export const router = createBrowserRouter([
       {
         path: 'blog',
         element: <ComingSoonPage title="Zosterix Blog" />,
+      },
+      {
+        path: 'profile',
+        element: (
+          <ProtectedRoute>
+            <AccountSettingsPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'settings/profile',
+        element: (
+          <ProtectedRoute>
+            <AccountSettingsPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'settings/emails',
+        element: (
+          <ProtectedRoute>
+            <AccountSettingsPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'settings/notifications',
+        element: (
+          <ProtectedRoute>
+            <AccountSettingsPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'settings/security',

@@ -67,6 +67,11 @@ func main() {
 	}))
 
 	// Routes
+	// Root route
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{"status": "ok", "message": "Zosterix API is running"})
+	})
+
 	api := r.Group("/api/v1")
 
 	// Public Auth Routes
@@ -90,6 +95,8 @@ func main() {
 	protected.Use(auth.RequireAuth(config.JWTSecret))
 	{
 		protected.GET("/users/me", authHandler.GetMe)
+		protected.PUT("/users/settings", authHandler.UpdateUserSettings)
+		protected.PUT("/users/profile", authHandler.UpdateUserProfile)
 	}
 
 	// Health check
