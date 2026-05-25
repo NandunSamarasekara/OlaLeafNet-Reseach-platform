@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Beaker, Globe, Shield } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const Z_STATES = [
@@ -189,29 +189,25 @@ export function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
-                icon: <Globe className="w-24 h-24 stroke-[1]" />,
+                icon: "/global-distribution-with-circular-arrow.svg",
                 title: 'Global Network',
+                description: 'Connect with specialists across continents who share your niche research interests.',
                 path: '/feed'
               },
               {
-                icon: <Shield className="w-24 h-24 stroke-[1]" />,
+                icon: "/shield.svg",
                 title: 'Verified Mentorship',
+                description: 'Connect with experienced supervisors and gain insights from recognized experts in your field.',
                 path: '/supervisors'
               },
               {
-                icon: <Beaker className="w-24 h-24 stroke-[1]" />,
+                icon: "/lab.svg",
                 title: 'Live Lab Feeds',
+                description: 'Share incremental progress and get real-time feedback before official publication.',
                 path: '/blog'
               }
             ].map((f, i) => (
-              <Link key={i} to={f.path} className="group relative p-12 rounded-[40px] border border-black/40 bg-white/20 hover:bg-white/40 transition-all flex flex-col items-center justify-center gap-12 aspect-square">
-                <div className="text-black transition-transform group-hover:scale-110">
-                  {f.icon}
-                </div>
-                <h3 className="text-3xl font-serif flex items-center gap-4">
-                  {f.title} <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
-                </h3>
-              </Link>
+              <ToolCard key={i} {...f} />
             ))}
           </div>
         </div>
@@ -243,6 +239,31 @@ export function LandingPage() {
         </div>
       </section>
     </div>
+  )
+}
+
+function ToolCard({ icon, title, description, path }: { icon: string, title: string, description: string, path: string }) {
+  return (
+    <Link to={path} className="group h-[500px] w-full [perspective:1000px]">
+      <div className="relative h-full w-full rounded-[40px] transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+        {/* Front Face */}
+        <div className="absolute inset-0 h-full w-full rounded-[40px] border border-black/20 bg-white/30 backdrop-blur-md flex flex-col items-center justify-center gap-12 p-12 [backface-visibility:hidden]">
+          <div className="w-40 h-40 flex items-center justify-center transition-transform group-hover:scale-110">
+            <img src={icon} alt={title} className="w-full h-full object-contain" />
+          </div>
+          <h3 className="text-3xl font-serif flex items-center gap-4 text-black">
+            {title} <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
+          </h3>
+        </div>
+
+        {/* Back Face */}
+        <div className="absolute inset-0 h-full w-full rounded-[40px] bg-zinc-800 p-12 text-white flex items-center justify-center text-center [transform:rotateY(180deg)] [backface-visibility:hidden]">
+          <p className="text-3xl font-serif leading-relaxed px-4">
+            {description}
+          </p>
+        </div>
+      </div>
+    </Link>
   )
 }
 
