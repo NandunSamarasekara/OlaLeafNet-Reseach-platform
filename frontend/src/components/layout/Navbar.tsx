@@ -23,8 +23,8 @@ export function Navbar() {
   return (
     <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-6">
       <div className="flex items-center justify-between w-full max-w-7xl bg-[#c5c5c5]/60 backdrop-blur-2xl border border-white/30 rounded-full px-8 py-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)]">
-        <Link to="/" className="flex items-center">
-          <img src="/zosterix-icon.svg" alt="Zosterix" className="h-10 w-auto opacity-90" />
+        <Link to="/" className="flex items-center gap-3">
+          <img src="/zosterix-icon.svg" alt="Zosterix Icon" className="h-10 w-auto opacity-90" />
         </Link>
 
         {/* Desktop Navigation - Center Pill */}
@@ -43,10 +43,10 @@ export function Navbar() {
                 key={item.label}
                 to={item.path}
                 className={`
-                  px-6 py-2 rounded-full text-[15px] font-medium transition-all duration-300
+                  px-6 py-2 rounded-full text-[16px] font-serif transition-all duration-300
                   ${isActive
-                    ? 'bg-white text-blue-900 shadow-sm'
-                    : 'text-zinc-600 hover:text-zinc-900'
+                    ? 'bg-white text-black shadow-sm'
+                    : 'text-zinc-500 hover:text-black'
                   }
                 `}
               >
@@ -61,12 +61,12 @@ export function Navbar() {
           {!state.isAuthenticated ? (
             <div className="hidden items-center gap-4 md:flex">
               <Link to="/login">
-                <Button variant="ghost" className="rounded-full px-6 py-2.5 text-[15px] font-bold text-zinc-600 hover:text-black hover:bg-white/50 transition-all">
+                <Button variant="ghost" className="rounded-full px-8 py-3 text-[16px] font-serif text-zinc-500 hover:text-black hover:bg-white/50 transition-all">
                   Log in
                 </Button>
               </Link>
               <Link to="/register">
-                <Button className="rounded-full px-8 py-2.5 text-[15px] font-bold bg-black hover:bg-zinc-800 text-white transition-all shadow-sm">
+                <Button className="rounded-full px-10 py-3 text-[16px] font-serif bg-black hover:bg-zinc-800 text-white transition-all shadow-sm">
                   Sign up
                 </Button>
               </Link>
@@ -124,8 +124,8 @@ export function Navbar() {
                   key={item.label}
                   to={item.path}
                   className={`
-                    px-6 py-4 rounded-2xl text-lg font-medium transition-all
-                    ${isActive ? 'bg-white text-blue-900 shadow-sm' : 'text-zinc-600 hover:bg-zinc-50/50'}
+                    px-6 py-4 rounded-2xl text-xl font-serif transition-all
+                    ${isActive ? 'bg-white text-black shadow-sm' : 'text-zinc-500 hover:bg-zinc-50/50'}
                   `}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -137,10 +137,10 @@ export function Navbar() {
           {!state.isAuthenticated && (
             <div className="flex flex-col gap-3 pt-6 border-t border-zinc-50">
               <Link to="/login">
-                <Button variant="outline" className="w-full rounded-2xl py-6 font-bold text-zinc-600">Log in</Button>
+                <Button variant="outline" className="w-full rounded-2xl py-8 text-xl font-serif text-zinc-500">Log in</Button>
               </Link>
               <Link to="/register">
-                <Button className="w-full rounded-2xl py-6 font-bold bg-black text-white">Sign up</Button>
+                <Button className="w-full rounded-2xl py-8 text-xl font-serif bg-black text-white">Sign up</Button>
               </Link>
             </div>
           )}

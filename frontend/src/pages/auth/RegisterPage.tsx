@@ -102,43 +102,33 @@ export function RegisterPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-white px-6 py-12">
-      {/* Back Button */}
-      <Link 
-        to="/" 
-        className="absolute left-6 top-6 md:left-12 md:top-12 flex items-center gap-2 text-sm font-bold text-zinc-400 hover:text-black transition-colors"
-      >
-        <ArrowLeft size={18} />
-        <span>Back to Home</span>
-      </Link>
-
-      <div className="w-full max-w-[500px]">
-        <div className="mb-6 text-center flex flex-col items-center">
-          <Link to="/">
-            <img src="/zosterix.svg" alt="Zosterix" className="h-36 w-auto" />
-          </Link>
-          <h1 className="mt-4 text-4xl font-black tracking-tighter">Create account</h1>
-          <p className="mt-2 text-zinc-500 font-medium">Join the next generation of researchers.</p>
+    <div className="relative flex min-h-[80vh] items-center justify-center grid-bg font-serif py-12 md:py-24">
+      <div className="w-full max-w-[560px] bg-white/40 backdrop-blur-xl border border-black/5 rounded-[3.5rem] p-10 md:p-14 shadow-2xl shadow-black/5">
+        <div className="mb-12 text-center">
+          <h1 className="text-5xl font-normal tracking-tight uppercase">Create account</h1>
+          <p className="mt-4 text-zinc-500 text-xl italic leading-relaxed px-4">
+            "Join the next generation of researchers."
+          </p>
         </div>
 
         {error && (
-          <Alert variant="destructive" className="mb-8 rounded-2xl border-red-50 bg-red-50/10">
-            <AlertDescription className="font-bold">{error}</AlertDescription>
+          <Alert variant="destructive" className="mb-8 rounded-2xl border-red-100 bg-red-50/50">
+            <AlertDescription className="font-bold text-red-800">{error}</AlertDescription>
           </Alert>
         )}
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
               name="fullName"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">Full Name</FormLabel>
+                <FormItem className="space-y-3">
+                  <FormLabel className="text-[11px] font-bold uppercase tracking-[0.3em] text-black pl-4">Full Academic Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Dr. Amal Perera" className="rounded-2xl border-zinc-100 bg-zinc-50 px-4 py-7 focus:bg-white transition-all" {...field} />
+                    <Input placeholder="Dr. Amal Perera" className="rounded-2xl border-black/5 bg-white px-6 py-8 text-lg font-serif transition-all focus:ring-2 focus:ring-black/5" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="pl-4" />
                 </FormItem>
               )}
             />
@@ -147,40 +137,40 @@ export function RegisterPage() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">Email Address</FormLabel>
+                <FormItem className="space-y-3">
+                  <FormLabel className="text-[11px] font-bold uppercase tracking-[0.3em] text-black pl-4">Institution Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="amal@university.edu" type="email" className="rounded-2xl border-zinc-100 bg-zinc-50 px-4 py-7 focus:bg-white transition-all" {...field} />
+                    <Input placeholder="amal@university.edu" type="email" className="rounded-2xl border-black/5 bg-white px-6 py-8 text-lg font-serif transition-all focus:ring-2 focus:ring-black/5" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="pl-4" />
                 </FormItem>
               )}
             />
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <FormField
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">Password</FormLabel>
+                  <FormItem className="space-y-3">
+                    <FormLabel className="text-[11px] font-bold uppercase tracking-[0.3em] text-black pl-4">Create Vault Key</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
                           type={showPassword ? 'text' : 'password'}
-                          className="rounded-2xl border-zinc-100 bg-zinc-50 px-4 py-7 pr-12 focus:bg-white transition-all"
+                          className="rounded-2xl border-black/5 bg-white px-6 py-8 pr-14 text-lg font-serif transition-all focus:ring-2 focus:ring-black/5"
                           {...field}
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-black"
+                          className="absolute right-6 top-1/2 -translate-y-1/2 text-zinc-300 hover:text-black transition-colors"
                         >
-                          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                          {showPassword ? <EyeOff size={20} strokeWidth={1.5} /> : <Eye size={20} strokeWidth={1.5} />}
                         </button>
                       </div>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="pl-4" />
                   </FormItem>
                 )}
               />
@@ -189,16 +179,16 @@ export function RegisterPage() {
                 control={form.control}
                 name="confirmPassword"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">Confirm</FormLabel>
+                  <FormItem className="space-y-3">
+                    <FormLabel className="text-[11px] font-bold uppercase tracking-[0.3em] text-black pl-4">Confirm Key</FormLabel>
                     <FormControl>
                       <Input
                         type={showPassword ? 'text' : 'password'}
-                        className="rounded-2xl border-zinc-100 bg-zinc-50 px-4 py-7 focus:bg-white transition-all"
+                        className="rounded-2xl border-black/5 bg-white px-6 py-8 text-lg font-serif transition-all focus:ring-2 focus:ring-black/5"
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="pl-4" />
                   </FormItem>
                 )}
               />
@@ -209,12 +199,12 @@ export function RegisterPage() {
               name="role"
               render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">I am a...</FormLabel>
+                  <FormLabel className="text-[11px] font-bold uppercase tracking-[0.3em] text-black pl-4">Researcher Profile Type</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="grid grid-cols-3 gap-3"
+                      className="grid grid-cols-3 gap-4"
                     >
                       {[
                         { id: 'researcher', label: 'Researcher' },
@@ -225,14 +215,14 @@ export function RegisterPage() {
                           <FormControl>
                             <RadioGroupItem value={r.id} className="peer sr-only" />
                           </FormControl>
-                          <FormLabel className="flex h-full flex-col items-center justify-center rounded-2xl border border-zinc-100 bg-zinc-50 p-4 text-center transition-all peer-data-[state=checked]:border-black peer-data-[state=checked]:bg-black peer-data-[state=checked]:text-white cursor-pointer hover:border-zinc-300">
-                            <span className="text-xs font-black uppercase tracking-tight">{r.label}</span>
+                          <FormLabel className="flex h-full flex-col items-center justify-center rounded-[1.5rem] border border-black/5 bg-white p-6 text-center transition-all peer-data-[state=checked]:bg-[#444] peer-data-[state=checked]:text-white cursor-pointer hover:border-black/20 hover:shadow-xl">
+                            <span className="text-[10px] font-black uppercase tracking-widest">{r.label}</span>
                           </FormLabel>
                         </FormItem>
                       ))}
                     </RadioGroup>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="pl-4" />
                 </FormItem>
               )}
             />
@@ -241,17 +231,17 @@ export function RegisterPage() {
               control={form.control}
               name="agreedToTerms"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-1">
+                <FormItem className="flex flex-row items-start space-x-4 space-y-0 p-2">
                   <FormControl>
                     <Checkbox
                       checked={!!field.value}
                       onCheckedChange={field.onChange}
-                      className="rounded-lg border-zinc-200 h-5 w-5 data-[state=checked]:bg-black data-[state=checked]:border-black"
+                      className="rounded-lg border-black/10 h-6 w-6 data-[state=checked]:bg-black data-[state=checked]:border-black"
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel className="text-xs font-medium text-zinc-400">
-                      I agree to the <Link to="/terms" className="font-black text-zinc-900 hover:underline">Terms of Service</Link> and <Link to="/privacy" className="font-black text-zinc-900 hover:underline">Privacy Policy</Link>
+                    <FormLabel className="text-sm font-normal text-zinc-400 italic">
+                      I agree to the <Link to="/terms" className="font-bold text-zinc-900 hover:underline decoration-1 underline-offset-4">Terms</Link> and <Link to="/privacy" className="font-bold text-zinc-900 hover:underline decoration-1 underline-offset-4">Privacy Policy</Link>
                     </FormLabel>
                     <FormMessage />
                   </div>
@@ -259,21 +249,21 @@ export function RegisterPage() {
               )}
             />
 
-            <Button type="submit" disabled={isLoading} className="w-full rounded-2xl py-8 text-lg font-black tracking-tight">
-              {isLoading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : 'Create Account'}
+            <Button type="submit" disabled={isLoading} className="w-full rounded-2xl py-8 text-xl font-serif bg-[#444] hover:bg-black text-white shadow-xl hover:shadow-2xl transition-all">
+              {isLoading ? <Loader2 className="mr-2 h-6 w-6 animate-spin" /> : 'Create Account'}
             </Button>
           </form>
         </Form>
 
-        <div className="my-10 flex items-center gap-4">
-          <Separator className="flex-1 bg-zinc-100" />
-          <span className="text-xs font-bold uppercase tracking-widest text-zinc-300">Or</span>
-          <Separator className="flex-1 bg-zinc-100" />
+        <div className="my-12 flex items-center gap-6">
+          <div className="flex-1 h-px bg-black/5" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-black">OR</span>
+          <div className="flex-1 h-px bg-black/5" />
         </div>
 
         <Button
           variant="outline"
-          className="w-full rounded-2xl py-8 text-lg font-bold border-zinc-100 hover:bg-zinc-50 transition-all"
+          className="w-full rounded-2xl py-8 text-lg font-serif border-black/5 bg-white text-black hover:bg-black hover:text-white transition-all shadow-sm hover:shadow-xl"
           onClick={() => window.location.href = `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/auth/google`}
         >
           <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
@@ -282,12 +272,12 @@ export function RegisterPage() {
             <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
             <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
           </svg>
-          Google
+          Google Academic
         </Button>
 
-        <p className="mt-10 text-center text-sm font-medium text-zinc-500">
-          Already have an account?{' '}
-          <Link to="/login" className="font-black text-black hover:underline decoration-2 underline-offset-4">Sign in</Link>
+        <p className="mt-12 text-center text-lg font-serif">
+          <span className="text-zinc-400 italic">Already have an account?</span>{' '}
+          <Link to="/login" className="font-bold text-black hover:underline decoration-1 underline-offset-8">Sign in</Link>
         </p>
       </div>
     </div>

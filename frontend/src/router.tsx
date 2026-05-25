@@ -14,6 +14,8 @@ import { ProtectedRoute } from './components/auth/ProtectedRoute'
 import { MainLayout } from './components/layout/MainLayout'
 import { ResearcherDashboardPage } from './pages/researcher/ResearcherDashboardPage'
 import { AccountSettingsPage } from './pages/profile/AccountSettingsPage'
+import { UserGuidePage } from './pages/UserGuidePage'
+import { AboutPage } from './pages/AboutPage'
 
 
 
@@ -27,12 +29,40 @@ export const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
+        path: 'login',
+        element: <LoginPage />,
+      },
+      {
+        path: 'register',
+        element: <RegisterPage />,
+      },
+      {
+        path: 'verify-email',
+        element: <VerifyEmailPage />,
+      },
+      {
+        path: 'forgot-password',
+        element: <ForgotPasswordPage />,
+      },
+      {
+        path: 'reset-password',
+        element: <ResetPasswordPage />,
+      },
+      {
         path: 'dashboard',
         element: (
           <ProtectedRoute>
             <ResearcherDashboardPage />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: 'guide',
+        element: <UserGuidePage />,
+      },
+      {
+        path: 'about',
+        element: <AboutPage />,
       },
       {
         path: 'feed',
@@ -95,26 +125,6 @@ export const router = createBrowserRouter([
         ),
       },
     ],
-  },
-  {
-    path: '/login',
-    element: <LoginPage />,
-  },
-  {
-    path: '/register',
-    element: <RegisterPage />,
-  },
-  {
-    path: '/verify-email',
-    element: <VerifyEmailPage />,
-  },
-  {
-    path: '/forgot-password',
-    element: <ForgotPasswordPage />,
-  },
-  {
-    path: '/reset-password',
-    element: <ResetPasswordPage />,
   },
   {
     path: '/auth/callback',
