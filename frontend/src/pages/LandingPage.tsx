@@ -57,7 +57,7 @@ export function LandingPage() {
   return (
     <div className="relative overflow-hidden font-serif">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 px-6 grid-bg min-h-[90vh] flex items-center">
+      <section className="relative pt-2 pb-32 px-6 grid-bg min-h-[80vh] flex items-start">
         <div className="mx-auto max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="z-10">
             <h1 className="text-6xl md:text-[110px] font-normal leading-[0.95] text-black mb-12 tracking-tight">
@@ -96,33 +96,33 @@ export function LandingPage() {
               </svg>
 
               {/* Nodes */}
-              <ZNode 
-                label="Services" 
-                x={points[0].x} 
-                y={points[0].y} 
-                path="/dashboard" 
-                position="bottom-left" 
+              <ZNode
+                label="Services"
+                x={points[0].x}
+                y={points[0].y}
+                path="/dashboard"
+                position="bottom-left"
               />
-              <ZNode 
-                label="Threads" 
-                x={points[1].x} 
-                y={points[1].y} 
-                path="/forum" 
-                position="top-right" 
+              <ZNode
+                label="Threads"
+                x={points[1].x}
+                y={points[1].y}
+                path="/forum"
+                position="top-right"
               />
-              <ZNode 
-                label="Blogs" 
-                x={points[2].x} 
-                y={points[2].y} 
-                path="/blog" 
-                position="bottom-left" 
+              <ZNode
+                label="Blogs"
+                x={points[2].x}
+                y={points[2].y}
+                path="/blog"
+                position="bottom-left"
               />
-              <ZNode 
-                label="Contact us" 
-                x={points[3].x} 
-                y={points[3].y} 
-                path="/contact" 
-                position="top-right" 
+              <ZNode
+                label="Contact us"
+                x={points[3].x}
+                y={points[3].y}
+                path="/contact"
+                position="top-right"
               />
             </div>
           </div>
@@ -253,7 +253,7 @@ function ZNode({ label, x, y, path, position }: { label: string, x: number, y: n
   };
 
   return (
-    <Link 
+    <Link
       to={path}
       className="absolute group z-20 cursor-pointer transition-all duration-[2000ms] ease-in-out flex items-center justify-center w-4 h-4"
       style={{ left: `${x}px`, top: `${y}px` }}
