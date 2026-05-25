@@ -7,9 +7,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
           {/* Brand */}
           <div className="space-y-6">
-            <Link to="/" className="flex flex-col gap-2">
-              <img src="/zosterix.svg" alt="Zosterix" className="h-16 w-auto brightness-0 invert" />
-              <span className="text-4xl">Zosterix</span>
+            <Link to="/" className="text-4xl hover:opacity-80 transition-opacity">
+              Zosterix
             </Link>
           </div>
           

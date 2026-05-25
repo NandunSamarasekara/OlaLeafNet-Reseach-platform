@@ -247,10 +247,8 @@ export function UserGuidePage() {
                 </li>
               </ul>
             </div>
-            <div className="aspect-[4/3] rounded-[3rem] bg-white/40 backdrop-blur-xl border border-black/5 p-8 shadow-2xl overflow-hidden group">
-              <div className="h-full w-full rounded-[2rem] bg-black flex items-center justify-center group-hover:scale-110 transition-transform duration-700 p-12">
-                <img src="/zosterix-icon.svg" alt="Zosterix" className="w-full h-full object-contain invert opacity-10" />
-              </div>
+            <div className="aspect-[4/3] rounded-[3rem] bg-white/40 backdrop-blur-xl border border-black/5 p-12 shadow-2xl flex items-center justify-center group">
+              <img src="/zosterix-icon.svg" alt="Zosterix" className="w-full h-full object-contain opacity-80 group-hover:scale-110 transition-transform duration-700" />
             </div>
           </section>
 
