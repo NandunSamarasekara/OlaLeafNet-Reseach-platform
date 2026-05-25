@@ -57,7 +57,7 @@ export function LandingPage() {
   return (
     <div className="relative overflow-hidden font-serif">
       {/* Hero Section */}
-      <section className="relative pt-2 pb-32 px-6 grid-bg min-h-[80vh] flex items-start">
+      <section className="relative pt-18 pb-32 px-6 grid-bg min-h-[80vh] flex items-start">
         <div className="mx-auto max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="z-10">
             <h1 className="text-6xl md:text-[110px] font-normal leading-[0.95] text-black mb-12 tracking-tight">
