@@ -1,8 +1,10 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @theme {
   --color-brand: #000000;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Libre Baskerville', serif;
 }
 
 :root {
@@ -33,4 +35,12 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.grid-bg {
+  background-image: 
+    radial-gradient(#cbd5e1 1px, transparent 1px),
+    conic-gradient(from 0deg at 50% 50%, #D2E0FF 0%, #E8F0FF 50%, #D2E0FF 100%);
+  background-size: 40px 40px, 100% 100%;
+  background-attachment: fixed;
 }

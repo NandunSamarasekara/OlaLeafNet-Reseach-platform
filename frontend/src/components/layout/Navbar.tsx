@@ -20,24 +20,26 @@ export function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-100 bg-white/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 bg-white border-b border-zinc-100">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center">
-          <img src="/zosterix.svg" alt="Zosterix" className="h-16 w-auto" />
+          <img src="/zosterix.svg" alt="Zosterix" className="h-12 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-10 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {[
-            { label: 'Feed', path: '/feed' },
-            { label: 'Forum', path: '/forum' },
-            { label: 'Supervisors', path: '/supervisors' },
-            { label: 'Blog', path: '/blog' },
+            { label: 'Home', path: '/' },
+            { label: 'User Guide', path: '/guide' },
+            { label: 'People', path: '/people' },
+            { label: 'Trending', path: '/trending' },
+            { label: 'Threads', path: '/forum' },
+            { label: 'About us', path: '/about' },
           ].map((item) => (
             <Link 
               key={item.label}
               to={item.path} 
-              className="text-sm font-bold text-zinc-500 transition-colors hover:text-black"
+              className="text-[17px] font-serif text-zinc-800 transition-colors hover:text-black"
             >
               {item.label}
             </Link>
@@ -45,17 +47,17 @@ export function Navbar() {
         </nav>
 
         {/* Auth Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-8">
           {!state.isAuthenticated ? (
-            <div className="hidden items-center gap-4 md:flex">
-              <Link to="/login" className="text-sm font-bold text-zinc-500 hover:text-black transition-colors">Sign In</Link>
+            <div className="hidden items-center gap-8 md:flex">
+              <Link to="/login" className="text-[17px] font-serif text-zinc-800 hover:text-black transition-colors">Log in</Link>
               <Link to="/register">
-                <Button className="rounded-xl px-6 font-bold">Join Community</Button>
+                <Button className="rounded-xl px-8 py-6 text-[17px] font-serif bg-[#444] hover:bg-black text-white">Sign up</Button>
               </Link>
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <Link to="/dashboard" className="hidden md:block mr-2 text-sm font-bold text-zinc-500 hover:text-black">Dashboard</Link>
+              <Link to="/dashboard" className="hidden md:block mr-2 text-sm font-bold text-zinc-800 hover:text-black">Dashboard</Link>
               <Button variant="ghost" size="icon" className="rounded-full text-zinc-500">
                 <Bell size={20} />
               </Button>

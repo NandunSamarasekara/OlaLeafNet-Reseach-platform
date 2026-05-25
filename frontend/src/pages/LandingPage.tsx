@@ -1,117 +1,182 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Beaker, GraduationCap, Users, Shield, Zap, Globe } from 'lucide-react'
+import { ArrowRight, Beaker, Globe, Shield, Info } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function LandingPage() {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden font-serif">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 md:pt-32 md:pb-48 px-6">
-        <div className="mx-auto max-w-7xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-zinc-50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-zinc-500 mb-8 border border-zinc-100">
-            <Zap size={14} className="text-black" />
-            Now in Private Beta
-          </div>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-black mb-8 leading-[0.9]">
-            RESEARCH<br />
-            WITHOUT<br />
-            <span className="text-zinc-600">BOUNDARIES.</span>
-          </h1>
-          <p className="mx-auto max-w-2xl text-lg md:text-xl text-zinc-500 font-medium leading-relaxed mb-12">
-            Zosterix is the premier ecosystem for scholars to connect, collaborate on breakthroughs, and find mentorship in a streamlined, minimalist environment.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <section className="relative pt-20 pb-32 px-6 grid-bg min-h-[90vh] flex items-center">
+        <div className="mx-auto max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="z-10">
+            <h1 className="text-6xl md:text-[110px] font-normal leading-[0.95] text-black mb-12 tracking-tight">
+              RESEARCH<br />
+              WITHOUT<br />
+              BOUNDARIES
+            </h1>
             <Link to="/register">
-              <Button size="lg" className="rounded-2xl px-10 py-8 text-lg font-black tracking-tight group">
+              <Button className="rounded-xl px-12 py-8 text-2xl font-serif bg-[#444] hover:bg-black text-white transition-all shadow-lg hover:shadow-xl">
                 Get Started
-                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-            <Link to="/forum">
-              <Button size="lg" variant="ghost" className="rounded-2xl px-10 py-8 text-lg font-black tracking-tight text-zinc-400 hover:text-black">
-                Explore Community
               </Button>
             </Link>
           </div>
-        </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-full h-full opacity-20 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-zinc-100 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-zinc-50 rounded-full blur-3xl" />
+          {/* Interactive Z Graphic */}
+          <div className="relative h-[500px] w-full flex items-center justify-center">
+            <div className="relative w-full max-w-[500px] aspect-square">
+              {/* The Z Lines (SVG) */}
+              <svg viewBox="0 0 400 400" className="absolute inset-0 w-full h-full pointer-events-none">
+                <line x1="100" y1="100" x2="300" y2="100" stroke="black" strokeWidth="1" />
+                <line x1="300" y1="100" x2="100" y2="300" stroke="black" strokeWidth="1" />
+                <line x1="302" y1="102" x2="102" y2="302" stroke="black" strokeWidth="1" />
+                <line x1="100" y1="300" x2="300" y2="300" stroke="black" strokeWidth="1" />
+              </svg>
+
+              {/* Nodes */}
+              <ZNode label="Services" x="100" y="100" path="/dashboard" position="left" />
+              <ZNode label="Threads" x="300" y="100" path="/forum" position="top" />
+              <ZNode label="Blogs" x="100" y="300" path="/blog" position="bottom" />
+              <ZNode label="Contact us" x="300" y="300" path="/contact" position="right" />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Stats/Proof Section */}
-      <section className="py-24 bg-black text-white px-6">
+      {/* Mission Section */}
+      <section className="py-32 px-6 bg-[#f8faff] border-t border-zinc-100">
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center gap-20">
+          <div className="flex-1 flex justify-center">
+            <div className="relative w-64 h-64">
+               {/* Network Icon Concept */}
+               <svg viewBox="0 0 100 100" className="w-full h-full">
+                  <circle cx="50" cy="50" r="15" fill="none" stroke="black" strokeWidth="4" />
+                  <circle cx="20" cy="20" r="8" fill="none" stroke="black" strokeWidth="4" />
+                  <circle cx="80" cy="25" r="8" fill="none" stroke="black" strokeWidth="4" />
+                  <circle cx="20" cy="65" r="8" fill="none" stroke="black" strokeWidth="4" />
+                  <circle cx="75" cy="85" r="10" fill="none" stroke="black" strokeWidth="4" />
+                  <line x1="28" y1="28" x2="40" y2="40" stroke="black" strokeWidth="4" />
+                  <line x1="72" y1="32" x2="60" y2="45" stroke="black" strokeWidth="4" />
+                  <line x1="28" y1="60" x2="38" y2="55" stroke="black" strokeWidth="4" />
+                  <line x1="68" y1="78" x2="58" y2="65" stroke="black" strokeWidth="4" />
+               </svg>
+            </div>
+          </div>
+          <div className="flex-[1.5]">
+            <p className="text-3xl md:text-5xl font-serif leading-tight text-zinc-900">
+              premier ecosystem for scholars to connect, collaborate on breakthroughs, and find mentorship in a streamlined, minimalist environment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-24 bg-[#333] text-white px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             <div>
-              <div className="text-5xl font-black tracking-tighter mb-2">12K+</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">Active Researchers</div>
+              <div className="text-6xl font-serif mb-4 tracking-tighter">12K+</div>
+              <div className="text-2xl font-serif text-white opacity-90">Active researchers</div>
             </div>
             <div>
-              <div className="text-5xl font-black tracking-tighter mb-2">450+</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">Global Institutions</div>
+              <div className="text-6xl font-serif mb-4 tracking-tighter">450+</div>
+              <div className="text-2xl font-serif text-white opacity-90">Global Institutions</div>
             </div>
             <div>
-              <div className="text-5xl font-black tracking-tighter mb-2">8.2k</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">Published Collaborations</div>
+              <div className="text-6xl font-serif mb-4 tracking-tighter">8.2K+</div>
+              <div className="text-2xl font-serif text-white opacity-90">Published Collaborators</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-32 px-6 bg-white">
+      {/* Tools Section */}
+      <section className="py-32 px-6 bg-[#f8faff] grid-bg">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-24 max-w-2xl">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">Tools for the modern academic.</h2>
-            <p className="text-zinc-500 font-medium text-lg">We've stripped away the noise of traditional social media to focus on what matters: the work.</p>
+          <div className="mb-24">
+            <h2 className="text-5xl md:text-[70px] font-serif mb-12">Tools for the modern academic...</h2>
+            <p className="text-xl md:text-2xl font-serif text-zinc-800 max-w-3xl">
+              We've stripped away the noise of traditional social media to focus on what matters: the work.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
-                icon: <Globe className="w-6 h-6" />,
+                icon: <Globe className="w-24 h-24 stroke-[1]" />,
                 title: 'Global Network',
-                desc: 'Connect with specialists across continents who share your niche research interests.'
+                path: '/feed'
               },
               {
-                icon: <Shield className="w-6 h-6" />,
+                icon: <Shield className="w-24 h-24 stroke-[1]" />,
                 title: 'Verified Mentorship',
-                desc: 'Our supervisor verification system ensures you connect with legitimate, approved mentors.'
+                path: '/supervisors'
               },
               {
-                icon: <Beaker className="w-6 h-6" />,
+                icon: <Beaker className="w-24 h-24 stroke-[1]" />,
                 title: 'Live Lab Feeds',
-                desc: 'Share incremental progress and get real-time feedback before official publication.'
+                path: '/blog'
               }
             ].map((f, i) => (
-              <div key={i} className="group p-10 rounded-3xl border border-zinc-100 bg-white hover:border-black transition-all duration-500">
-                <div className="w-14 h-14 rounded-2xl bg-zinc-50 flex items-center justify-center mb-8 group-hover:bg-black group-hover:text-white transition-colors">
+              <Link key={i} to={f.path} className="group relative p-12 rounded-[40px] border border-black/40 bg-white/20 hover:bg-white/40 transition-all flex flex-col items-center justify-center gap-12 aspect-square">
+                <div className="text-black transition-transform group-hover:scale-110">
                   {f.icon}
                 </div>
-                <h3 className="text-2xl font-black tracking-tight mb-4">{f.title}</h3>
-                <p className="text-zinc-500 font-medium leading-relaxed">{f.desc}</p>
-              </div>
+                <h3 className="text-3xl font-serif flex items-center gap-4">
+                  {f.title} <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
+                </h3>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 px-6">
-        <div className="mx-auto max-w-5xl rounded-[3rem] bg-zinc-50 p-12 md:p-24 text-center border border-zinc-100">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 italic">Ready to redefine your research journey?</h2>
+      {/* Features Bar */}
+      <section className="bg-[#333] py-16 text-white text-center">
+        <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-12 text-2xl font-serif">
+          <div>Create Blogs<br />on experience</div>
+          <div>Create threads to<br />discuss forums</div>
+          <div>Find supervisors<br />or collaborators</div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-40 px-6 grid-bg">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-5xl md:text-[84px] font-serif mb-16 leading-tight">
+            Ready to redefine your research journey?
+          </h2>
           <Link to="/register">
-            <Button size="lg" className="rounded-2xl px-12 py-8 text-xl font-black tracking-tight">
-              Create Your Account
+            <Button className="rounded-2xl px-16 py-10 text-3xl font-serif bg-[#444] hover:bg-black text-white shadow-2xl transition-all">
+              Create your Account
             </Button>
           </Link>
-          <p className="mt-8 text-sm font-bold text-zinc-400 uppercase tracking-widest">No credit card required · Academic email preferred</p>
+          <p className="mt-12 text-2xl font-serif text-zinc-800">
+            No credit card required · Academic email preferred
+          </p>
         </div>
       </section>
     </div>
+  )
+}
+
+function ZNode({ label, x, y, path, position }: { label: string, x: string, y: string, path: string, position: 'top' | 'bottom' | 'left' | 'right' }) {
+  const labelStyles = {
+    top: 'bottom-full mb-4 left-1/2 -translate-x-1/2',
+    bottom: 'top-full mt-4 left-1/2 -translate-x-1/2',
+    left: 'right-full mr-4 top-1/2 -translate-y-1/2 text-right',
+    right: 'left-full ml-4 top-1/2 -translate-y-1/2 text-left'
+  };
+
+  return (
+    <Link 
+      to={path}
+      className="absolute group z-20 cursor-pointer"
+      style={{ left: `${x}px`, top: `${y}px` }}
+    >
+      <div className="w-4 h-4 bg-black rounded-full transition-transform group-hover:scale-150 shadow-[0_0_0_8px_rgba(0,0,0,0.05)]" />
+      <span className={`absolute whitespace-nowrap text-3xl font-serif text-black opacity-90 transition-opacity group-hover:opacity-100 ${labelStyles[position]}`}>
+        {label}
+      </span>
+    </Link>
   )
 }
