@@ -1,8 +1,59 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Beaker, Globe, Shield, Info } from 'lucide-react'
+import { ArrowRight, Beaker, Globe, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
+const Z_STATES = [
+  // State 1: Blocky Z (Initial as per image)
+  [
+    { x: 100, y: 100 }, // Services
+    { x: 300, y: 100 }, // Threads
+    { x: 115, y: 400 }, // Blogs
+    { x: 315, y: 400 }, // Contact us
+  ],
+  // State 2: Wide Z (Pattern 2)
+  [
+    { x: 50, y: 50 },
+    { x: 350, y: 200 },
+    { x: 100, y: 400 },
+    { x: 380, y: 550 },
+  ],
+  // State 3: Mirrored Wide Z (Pattern 3)
+  [
+    { x: 350, y: 70 },
+    { x: 50, y: 220 },
+    { x: 320, y: 420 },
+    { x: 80, y: 580 },
+  ],
+]
+
 export function LandingPage() {
+  const [stateIndex, setStateIndex] = useState(0)
+  const [isLooping, setIsLooping] = useState(false)
+
+  useEffect(() => {
+    // Initial wait for 2 seconds in State 0
+    const timer = setTimeout(() => {
+      setStateIndex(1)
+      setIsLooping(true)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (!isLooping) return
+
+    const interval = setInterval(() => {
+      setStateIndex((current) => (current === 1 ? 2 : 1))
+    }, 3000) // Change state every 4 seconds (2s transition + 2s pause or continuous)
+
+
+    return () => clearInterval(interval)
+  }, [isLooping])
+
+  const points = Z_STATES[stateIndex]
+
   return (
     <div className="relative overflow-hidden font-serif">
       {/* Hero Section */}
@@ -21,22 +72,58 @@ export function LandingPage() {
             </Link>
           </div>
 
-          {/* Interactive Z Graphic */}
-          <div className="relative h-[500px] w-full flex items-center justify-center">
-            <div className="relative w-full max-w-[500px] aspect-square">
+          {/* Animated Z Graphic */}
+          <div className="relative h-[650px] w-full flex items-center justify-center">
+            <div className="relative w-[400px] h-[650px]">
               {/* The Z Lines (SVG) */}
-              <svg viewBox="0 0 400 400" className="absolute inset-0 w-full h-full pointer-events-none">
-                <line x1="100" y1="100" x2="300" y2="100" stroke="black" strokeWidth="1" />
-                <line x1="300" y1="100" x2="100" y2="300" stroke="black" strokeWidth="1" />
-                <line x1="302" y1="102" x2="102" y2="302" stroke="black" strokeWidth="1" />
-                <line x1="100" y1="300" x2="300" y2="300" stroke="black" strokeWidth="1" />
+              <svg viewBox="0 0 400 650" className="absolute inset-0 w-full h-full pointer-events-none">
+                {/* Line 1 (Primary) */}
+                <path
+                  d={`M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y} L ${points[2].x} ${points[2].y} L ${points[3].x} ${points[3].y}`}
+                  stroke="black"
+                  strokeWidth="1.2"
+                  fill="none"
+                  className="transition-all duration-[2000ms] ease-in-out"
+                />
+                {/* Line 2 (Parallel Offset) */}
+                <path
+                  d={`M ${points[0].x + 3} ${points[0].y + 3} L ${points[1].x + 3} ${points[1].y + 3} L ${points[2].x + 3} ${points[2].y + 3} L ${points[3].x + 3} ${points[3].y + 3}`}
+                  stroke="black"
+                  strokeWidth="0.8"
+                  fill="none"
+                  className="transition-all duration-[2000ms] ease-in-out opacity-40"
+                />
               </svg>
 
               {/* Nodes */}
-              <ZNode label="Services" x="100" y="100" path="/dashboard" position="left" />
-              <ZNode label="Threads" x="300" y="100" path="/forum" position="top" />
-              <ZNode label="Blogs" x="100" y="300" path="/blog" position="bottom" />
-              <ZNode label="Contact us" x="300" y="300" path="/contact" position="right" />
+              <ZNode 
+                label="Services" 
+                x={points[0].x} 
+                y={points[0].y} 
+                path="/dashboard" 
+                position="bottom-left" 
+              />
+              <ZNode 
+                label="Threads" 
+                x={points[1].x} 
+                y={points[1].y} 
+                path="/forum" 
+                position="top-right" 
+              />
+              <ZNode 
+                label="Blogs" 
+                x={points[2].x} 
+                y={points[2].y} 
+                path="/blog" 
+                position="bottom-left" 
+              />
+              <ZNode 
+                label="Contact us" 
+                x={points[3].x} 
+                y={points[3].y} 
+                path="/contact" 
+                position="top-right" 
+              />
             </div>
           </div>
         </div>
@@ -47,18 +134,18 @@ export function LandingPage() {
         <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center gap-20">
           <div className="flex-1 flex justify-center">
             <div className="relative w-64 h-64">
-               {/* Network Icon Concept */}
-               <svg viewBox="0 0 100 100" className="w-full h-full">
-                  <circle cx="50" cy="50" r="15" fill="none" stroke="black" strokeWidth="4" />
-                  <circle cx="20" cy="20" r="8" fill="none" stroke="black" strokeWidth="4" />
-                  <circle cx="80" cy="25" r="8" fill="none" stroke="black" strokeWidth="4" />
-                  <circle cx="20" cy="65" r="8" fill="none" stroke="black" strokeWidth="4" />
-                  <circle cx="75" cy="85" r="10" fill="none" stroke="black" strokeWidth="4" />
-                  <line x1="28" y1="28" x2="40" y2="40" stroke="black" strokeWidth="4" />
-                  <line x1="72" y1="32" x2="60" y2="45" stroke="black" strokeWidth="4" />
-                  <line x1="28" y1="60" x2="38" y2="55" stroke="black" strokeWidth="4" />
-                  <line x1="68" y1="78" x2="58" y2="65" stroke="black" strokeWidth="4" />
-               </svg>
+              {/* Network Icon Concept */}
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                <circle cx="50" cy="50" r="15" fill="none" stroke="black" strokeWidth="4" />
+                <circle cx="20" cy="20" r="8" fill="none" stroke="black" strokeWidth="4" />
+                <circle cx="80" cy="25" r="8" fill="none" stroke="black" strokeWidth="4" />
+                <circle cx="20" cy="65" r="8" fill="none" stroke="black" strokeWidth="4" />
+                <circle cx="75" cy="85" r="10" fill="none" stroke="black" strokeWidth="4" />
+                <line x1="28" y1="28" x2="40" y2="40" stroke="black" strokeWidth="4" />
+                <line x1="72" y1="32" x2="60" y2="45" stroke="black" strokeWidth="4" />
+                <line x1="28" y1="60" x2="38" y2="55" stroke="black" strokeWidth="4" />
+                <line x1="68" y1="78" x2="58" y2="65" stroke="black" strokeWidth="4" />
+              </svg>
             </div>
           </div>
           <div className="flex-[1.5]">
@@ -159,22 +246,20 @@ export function LandingPage() {
   )
 }
 
-function ZNode({ label, x, y, path, position }: { label: string, x: string, y: string, path: string, position: 'top' | 'bottom' | 'left' | 'right' }) {
+function ZNode({ label, x, y, path, position }: { label: string, x: number, y: number, path: string, position: 'top-right' | 'bottom-left' }) {
   const labelStyles = {
-    top: 'bottom-full mb-4 left-1/2 -translate-x-1/2',
-    bottom: 'top-full mt-4 left-1/2 -translate-x-1/2',
-    left: 'right-full mr-4 top-1/2 -translate-y-1/2 text-right',
-    right: 'left-full ml-4 top-1/2 -translate-y-1/2 text-left'
+    'top-right': 'bottom-full mb-2 left-0 -translate-y-2',
+    'bottom-left': 'top-full mt-2 right-0 translate-y-2 text-right',
   };
 
   return (
     <Link 
       to={path}
-      className="absolute group z-20 cursor-pointer"
+      className="absolute group z-20 cursor-pointer transition-all duration-[2000ms] ease-in-out flex items-center justify-center w-4 h-4"
       style={{ left: `${x}px`, top: `${y}px` }}
     >
-      <div className="w-4 h-4 bg-black rounded-full transition-transform group-hover:scale-150 shadow-[0_0_0_8px_rgba(0,0,0,0.05)]" />
-      <span className={`absolute whitespace-nowrap text-3xl font-serif text-black opacity-90 transition-opacity group-hover:opacity-100 ${labelStyles[position]}`}>
+      <div className="w-4 h-4 bg-black rounded-full transition-transform group-hover:scale-150 shadow-[0_0_0_8px_rgba(0,0,0,0.05)] flex-shrink-0" />
+      <span className={`absolute whitespace-nowrap text-[40px] font-serif text-black opacity-90 transition-opacity group-hover:opacity-100 ${labelStyles[position]}`}>
         {label}
       </span>
     </Link>
