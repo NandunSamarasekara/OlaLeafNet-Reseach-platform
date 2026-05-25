@@ -1,5 +1,5 @@
 import { useAuth } from '@/store/auth'
-import { LogOut, User as UserIcon, Bell, Menu, X, Github } from 'lucide-react'
+import { LogOut, User as UserIcon, Bell, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
@@ -45,7 +45,7 @@ export function Navbar() {
                 className={`
                   px-6 py-2 rounded-full text-[15px] font-medium transition-all duration-300
                   ${isActive
-                    ? 'bg-white text-[#bb2a2a] shadow-sm'
+                    ? 'bg-white text-blue-900 shadow-sm'
                     : 'text-zinc-600 hover:text-zinc-900'
                   }
                 `}
@@ -57,14 +57,17 @@ export function Navbar() {
         </nav>
 
         {/* Auth Actions & Social */}
-        <div className="flex items-center gap-6">
-          <Github size={20} className="text-zinc-600 hover:text-black cursor-pointer hidden md:block" />
-
+        <div className="flex items-center gap-4">
           {!state.isAuthenticated ? (
             <div className="hidden items-center gap-4 md:flex">
+              <Link to="/login">
+                <Button variant="ghost" className="rounded-full px-6 py-2.5 text-[15px] font-bold text-zinc-600 hover:text-black hover:bg-white/50 transition-all">
+                  Log in
+                </Button>
+              </Link>
               <Link to="/register">
-                <Button className="rounded-full px-8 py-2.5 text-[15px] font-bold bg-black hover:bg-zinc-800 text-white transition-all">
-                  Try Zosterix
+                <Button className="rounded-full px-8 py-2.5 text-[15px] font-bold bg-black hover:bg-zinc-800 text-white transition-all shadow-sm">
+                  Sign up
                 </Button>
               </Link>
             </div>
@@ -86,7 +89,7 @@ export function Navbar() {
                 variant="ghost"
                 size="icon"
                 onClick={handleLogout}
-                className="rounded-full text-zinc-500 hover:text-red-600"
+                className="rounded-full text-zinc-500 hover:text-blue-600"
               >
                 <LogOut size={20} />
               </Button>
@@ -122,7 +125,7 @@ export function Navbar() {
                   to={item.path}
                   className={`
                     px-6 py-4 rounded-2xl text-lg font-medium transition-all
-                    ${isActive ? 'bg-black text-white shadow-lg' : 'text-zinc-600 hover:bg-zinc-50'}
+                    ${isActive ? 'bg-white text-blue-900 shadow-sm' : 'text-zinc-600 hover:bg-zinc-50/50'}
                   `}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -134,10 +137,10 @@ export function Navbar() {
           {!state.isAuthenticated && (
             <div className="flex flex-col gap-3 pt-6 border-t border-zinc-50">
               <Link to="/login">
-                <Button variant="outline" className="w-full rounded-xl py-6 font-bold">Sign In</Button>
+                <Button variant="outline" className="w-full rounded-2xl py-6 font-bold text-zinc-600">Log in</Button>
               </Link>
               <Link to="/register">
-                <Button className="w-full rounded-xl py-6 font-bold">Create Account</Button>
+                <Button className="w-full rounded-2xl py-6 font-bold bg-black text-white">Sign up</Button>
               </Link>
             </div>
           )}
