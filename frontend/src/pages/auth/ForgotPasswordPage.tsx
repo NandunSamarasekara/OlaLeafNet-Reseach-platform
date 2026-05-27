@@ -51,17 +51,17 @@ export function ForgotPasswordPage() {
 
   if (isSuccess) {
     return (
-      <div className="flex min-h-[90vh] items-center justify-center px-6">
-        <div className="w-full max-w-[440px] text-center">
-          <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-[2.5rem] bg-zinc-50 border border-zinc-100">
-            <Mail className="h-10 w-10 text-black" />
+      <div className="flex min-h-[70vh] items-center justify-center font-serif px-6 grid-bg">
+        <div className="w-full max-w-[480px] text-center bg-white/40 backdrop-blur-xl border border-black/5 p-12 rounded-[3.5rem] shadow-2xl">
+          <div className="mx-auto mb-10 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-black text-white shadow-2xl">
+            <Mail className="h-10 w-10" strokeWidth={1} />
           </div>
-          <h1 className="text-4xl font-black tracking-tighter mb-4">Check your email</h1>
-          <p className="text-zinc-500 font-medium leading-relaxed mb-10">
-            If <span className="font-black text-black">{email}</span> is registered, you will receive a reset link shortly.
+          <h1 className="text-4xl font-normal tracking-tight uppercase mb-6">Check your email</h1>
+          <p className="text-zinc-500 text-xl italic leading-relaxed mb-12">
+            "If <span className="font-bold text-black">{email}</span> is registered, you will receive a reset link shortly."
           </p>
           <Link to="/login">
-            <Button variant="outline" className="w-full rounded-2xl py-8 font-bold border-zinc-100 hover:bg-zinc-50 transition-all">
+            <Button variant="outline" className="w-full rounded-2xl py-8 text-xl font-serif border-black/5 bg-white text-black hover:bg-black hover:text-white shadow-xl transition-all">
               Return to Login
             </Button>
           </Link>
@@ -71,49 +71,45 @@ export function ForgotPasswordPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-white px-6">
-      <Link 
-        to="/login" 
-        className="absolute left-6 top-6 md:left-12 md:top-12 flex items-center gap-2 text-sm font-bold text-zinc-400 hover:text-black transition-colors"
-      >
-        <ArrowLeft size={18} />
-        <span>Back to Login</span>
-      </Link>
-
-      <div className="w-full max-w-[440px]">
-        <div className="mb-6 text-center flex flex-col items-center">
-          <Link to="/">
-            <img src="/zosterix.svg" alt="Zosterix" className="h-36 w-auto" />
-          </Link>
-          <h1 className="mt-4 text-4xl font-black tracking-tighter">Reset password</h1>
-          <p className="mt-2 text-zinc-500 font-medium">We'll send you a recovery link.</p>
+    <div className="relative flex min-h-[80vh] items-center justify-center grid-bg font-serif py-20 px-6">
+      <div className="w-full max-w-[480px] bg-white/40 backdrop-blur-xl border border-black/5 p-12 rounded-[3.5rem] shadow-2xl">
+        <div className="mb-10 text-center">
+          <h1 className="text-5xl font-normal tracking-tight uppercase">Reset Vault</h1>
+          <p className="mt-4 text-zinc-500 text-xl italic leading-relaxed">
+            "We'll send you a recovery link to restore access."
+          </p>
         </div>
 
         {error && (
-          <Alert variant="destructive" className="mb-8 rounded-2xl border-red-50 bg-red-50/10">
-            <AlertDescription className="font-bold">{error}</AlertDescription>
+          <Alert variant="destructive" className="mb-8 rounded-2xl border-red-100 bg-red-50/50">
+            <AlertDescription className="font-bold text-red-800">{error}</AlertDescription>
           </Alert>
         )}
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">Email Address</FormLabel>
+                <FormItem className="space-y-3">
+                  <FormLabel className="text-[11px] font-bold uppercase tracking-[0.3em] text-black pl-4">Institutional Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="amal@example.com" type="email" className="rounded-2xl border-zinc-100 bg-zinc-50 px-4 py-7 focus:bg-white transition-all" {...field} autoFocus />
+                    <Input placeholder="researcher@university.edu" type="email" className="rounded-2xl border-black/5 bg-white px-6 py-8 text-lg font-serif transition-all focus:ring-2 focus:ring-black/5" {...field} autoFocus />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="pl-4" />
                 </FormItem>
               )}
             />
 
-            <Button type="submit" disabled={isLoading} className="w-full rounded-2xl py-8 text-lg font-black tracking-tight">
-              {isLoading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : 'Send Recovery Link'}
-            </Button>
+            <div className="flex flex-col gap-4">
+              <Button type="submit" disabled={isLoading} className="w-full rounded-2xl py-8 text-xl font-serif bg-[#444] hover:bg-black text-white shadow-xl hover:shadow-2xl transition-all">
+                {isLoading ? <Loader2 className="mr-2 h-6 w-6 animate-spin" /> : 'Send Recovery Link'}
+              </Button>
+              <Link to="/login" className="text-center py-4 text-zinc-400 hover:text-black transition-colors font-serif italic text-lg">
+                Remember your key? Sign in
+              </Link>
+            </div>
           </form>
         </Form>
       </div>

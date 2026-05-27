@@ -1,117 +1,288 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Beaker, GraduationCap, Users, Shield, Zap, Globe } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-export function LandingPage() {
-  return (
-    <div className="relative overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 md:pt-32 md:pb-48 px-6">
-        <div className="mx-auto max-w-7xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-zinc-50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-zinc-500 mb-8 border border-zinc-100">
-            <Zap size={14} className="text-black" />
-            Now in Private Beta
-          </div>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-black mb-8 leading-[0.9]">
-            RESEARCH<br />
-            WITHOUT<br />
-            <span className="text-zinc-600">BOUNDARIES.</span>
-          </h1>
-          <p className="mx-auto max-w-2xl text-lg md:text-xl text-zinc-500 font-medium leading-relaxed mb-12">
-            Zosterix is the premier ecosystem for scholars to connect, collaborate on breakthroughs, and find mentorship in a streamlined, minimalist environment.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/register">
-              <Button size="lg" className="rounded-2xl px-10 py-8 text-lg font-black tracking-tight group">
-                Get Started
-                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-            <Link to="/forum">
-              <Button size="lg" variant="ghost" className="rounded-2xl px-10 py-8 text-lg font-black tracking-tight text-zinc-400 hover:text-black">
-                Explore Community
-              </Button>
-            </Link>
-          </div>
-        </div>
+const Z_STATES = [
+  // State 1: Blocky Z (Initial as per image)
+  [
+    { x: 100, y: 100 }, // Services
+    { x: 300, y: 100 }, // Threads
+    { x: 115, y: 400 }, // Blogs
+    { x: 315, y: 400 }, // Contact us
+  ],
+  // State 2: Wide Z (Pattern 2)
+  [
+    { x: 50, y: 50 },
+    { x: 350, y: 200 },
+    { x: 100, y: 400 },
+    { x: 380, y: 550 },
+  ],
+  // State 3: Mirrored Wide Z (Pattern 3)
+  [
+    { x: 350, y: 70 },
+    { x: 50, y: 220 },
+    { x: 320, y: 420 },
+    { x: 80, y: 580 },
+  ],
+]
 
-        {/* Decorative Elements */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-full h-full opacity-20 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-zinc-100 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-zinc-50 rounded-full blur-3xl" />
+export function LandingPage() {
+  const [stateIndex, setStateIndex] = useState(0)
+  const [isLooping, setIsLooping] = useState(false)
+
+  useEffect(() => {
+    // Initial wait for 2 seconds in State 0
+    const timer = setTimeout(() => {
+      setStateIndex(1)
+      setIsLooping(true)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (!isLooping) return
+
+    const interval = setInterval(() => {
+      setStateIndex((current) => (current === 1 ? 2 : 1))
+    }, 3000) // Change state every 4 seconds (2s transition + 2s pause or continuous)
+
+
+    return () => clearInterval(interval)
+  }, [isLooping])
+
+  const points = Z_STATES[stateIndex]
+
+  return (
+    <div className="relative overflow-hidden font-serif">
+      {/* Hero Section */}
+      <section className="relative pt-18 pb-32 px-6 grid-bg min-h-[80vh] flex items-start">
+        <div className="mx-auto max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="z-10">
+            <h1 className="text-6xl md:text-[110px] font-normal leading-[0.95] text-black mb-12 tracking-tight">
+              RESEARCH<br />
+              WITHOUT<br />
+              BOUNDARIES
+            </h1>
+            <Link to="/register">
+              <Button className="rounded-xl px-12 py-8 text-2xl font-serif bg-[#444] hover:bg-black text-white transition-all shadow-lg hover:shadow-xl">
+                Get Started
+              </Button>
+            </Link>
+          </div>
+
+          {/* Animated Z Graphic */}
+          <div className="relative h-[650px] w-full flex items-center justify-center">
+            <div className="relative w-[400px] h-[650px]">
+              {/* The Z Lines (SVG) */}
+              <svg viewBox="0 0 400 650" className="absolute inset-0 w-full h-full pointer-events-none">
+                {/* Line 1 (Primary) */}
+                <path
+                  d={`M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y} L ${points[2].x} ${points[2].y} L ${points[3].x} ${points[3].y}`}
+                  stroke="black"
+                  strokeWidth="1.2"
+                  fill="none"
+                  className="transition-all duration-[2000ms] ease-in-out"
+                />
+                {/* Line 2 (Parallel Offset) */}
+                <path
+                  d={`M ${points[0].x + 3} ${points[0].y + 3} L ${points[1].x + 3} ${points[1].y + 3} L ${points[2].x + 3} ${points[2].y + 3} L ${points[3].x + 3} ${points[3].y + 3}`}
+                  stroke="black"
+                  strokeWidth="0.8"
+                  fill="none"
+                  className="transition-all duration-[2000ms] ease-in-out opacity-40"
+                />
+              </svg>
+
+              {/* Nodes */}
+              <ZNode
+                label="Services"
+                x={points[0].x}
+                y={points[0].y}
+                path="/dashboard"
+                position="bottom-left"
+              />
+              <ZNode
+                label="Threads"
+                x={points[1].x}
+                y={points[1].y}
+                path="/forum"
+                position="top-right"
+              />
+              <ZNode
+                label="Blogs"
+                x={points[2].x}
+                y={points[2].y}
+                path="/blog"
+                position="bottom-left"
+              />
+              <ZNode
+                label="Contact us"
+                x={points[3].x}
+                y={points[3].y}
+                path="/contact"
+                position="top-right"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Stats/Proof Section */}
-      <section className="py-24 bg-black text-white px-6">
+      {/* Mission Section */}
+      <section className="py-32 px-6 bg-[#f8faff] border-t border-zinc-100">
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center gap-20">
+          <div className="flex-1 flex justify-center">
+            <div className="relative w-64 h-64">
+              {/* Network Icon Concept */}
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                <circle cx="50" cy="50" r="15" fill="none" stroke="black" strokeWidth="4" />
+                <circle cx="20" cy="20" r="8" fill="none" stroke="black" strokeWidth="4" />
+                <circle cx="80" cy="25" r="8" fill="none" stroke="black" strokeWidth="4" />
+                <circle cx="20" cy="65" r="8" fill="none" stroke="black" strokeWidth="4" />
+                <circle cx="75" cy="85" r="10" fill="none" stroke="black" strokeWidth="4" />
+                <line x1="28" y1="28" x2="40" y2="40" stroke="black" strokeWidth="4" />
+                <line x1="72" y1="32" x2="60" y2="45" stroke="black" strokeWidth="4" />
+                <line x1="28" y1="60" x2="38" y2="55" stroke="black" strokeWidth="4" />
+                <line x1="68" y1="78" x2="58" y2="65" stroke="black" strokeWidth="4" />
+              </svg>
+            </div>
+          </div>
+          <div className="flex-[1.5]">
+            <p className="text-3xl md:text-5xl font-serif leading-tight text-zinc-900">
+              premier ecosystem for scholars to connect, collaborate on breakthroughs, and find mentorship in a streamlined, minimalist environment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-24 bg-[#333] text-white px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             <div>
-              <div className="text-5xl font-black tracking-tighter mb-2">12K+</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">Active Researchers</div>
+              <div className="text-6xl font-serif mb-4 tracking-tighter">12K+</div>
+              <div className="text-2xl font-serif text-white opacity-90">Active researchers</div>
             </div>
             <div>
-              <div className="text-5xl font-black tracking-tighter mb-2">450+</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">Global Institutions</div>
+              <div className="text-6xl font-serif mb-4 tracking-tighter">450+</div>
+              <div className="text-2xl font-serif text-white opacity-90">Global Institutions</div>
             </div>
             <div>
-              <div className="text-5xl font-black tracking-tighter mb-2">8.2k</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">Published Collaborations</div>
+              <div className="text-6xl font-serif mb-4 tracking-tighter">8.2K+</div>
+              <div className="text-2xl font-serif text-white opacity-90">Published Collaborators</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-32 px-6 bg-white">
+      {/* Tools Section */}
+      <section className="py-32 px-6 bg-[#f8faff] grid-bg">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-24 max-w-2xl">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">Tools for the modern academic.</h2>
-            <p className="text-zinc-500 font-medium text-lg">We've stripped away the noise of traditional social media to focus on what matters: the work.</p>
+          <div className="mb-24">
+            <h2 className="text-5xl md:text-[70px] font-serif mb-12">Tools for the modern academic...</h2>
+            <p className="text-xl md:text-2xl font-serif text-zinc-800 max-w-3xl">
+              We've stripped away the noise of traditional social media to focus on what matters: the work.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
-                icon: <Globe className="w-6 h-6" />,
+                icon: "/global-distribution-with-circular-arrow.svg",
                 title: 'Global Network',
-                desc: 'Connect with specialists across continents who share your niche research interests.'
+                description: 'Connect with specialists across continents who share your niche research interests.',
+                path: '/feed'
               },
               {
-                icon: <Shield className="w-6 h-6" />,
+                icon: "/shield.svg",
                 title: 'Verified Mentorship',
-                desc: 'Our supervisor verification system ensures you connect with legitimate, approved mentors.'
+                description: 'Connect with experienced supervisors and gain insights from recognized experts in your field.',
+                path: '/supervisors'
               },
               {
-                icon: <Beaker className="w-6 h-6" />,
+                icon: "/lab.svg",
                 title: 'Live Lab Feeds',
-                desc: 'Share incremental progress and get real-time feedback before official publication.'
+                description: 'Share incremental progress and get real-time feedback before official publication.',
+                path: '/blog'
               }
             ].map((f, i) => (
-              <div key={i} className="group p-10 rounded-3xl border border-zinc-100 bg-white hover:border-black transition-all duration-500">
-                <div className="w-14 h-14 rounded-2xl bg-zinc-50 flex items-center justify-center mb-8 group-hover:bg-black group-hover:text-white transition-colors">
-                  {f.icon}
-                </div>
-                <h3 className="text-2xl font-black tracking-tight mb-4">{f.title}</h3>
-                <p className="text-zinc-500 font-medium leading-relaxed">{f.desc}</p>
-              </div>
+              <ToolCard key={i} {...f} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 px-6">
-        <div className="mx-auto max-w-5xl rounded-[3rem] bg-zinc-50 p-12 md:p-24 text-center border border-zinc-100">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 italic">Ready to redefine your research journey?</h2>
+      {/* Features Bar */}
+      <section className="bg-[#333] py-16 text-white text-center">
+        <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-12 text-2xl font-serif">
+          <div>Create Blogs<br />on experience</div>
+          <div>Create threads to<br />discuss forums</div>
+          <div>Find supervisors<br />or collaborators</div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-40 px-6 grid-bg">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-5xl md:text-[84px] font-serif mb-16 leading-tight">
+            Ready to redefine your research journey?
+          </h2>
           <Link to="/register">
-            <Button size="lg" className="rounded-2xl px-12 py-8 text-xl font-black tracking-tight">
-              Create Your Account
+            <Button className="rounded-2xl px-16 py-10 text-3xl font-serif bg-[#444] hover:bg-black text-white shadow-2xl transition-all">
+              Create your Account
             </Button>
           </Link>
-          <p className="mt-8 text-sm font-bold text-zinc-400 uppercase tracking-widest">No credit card required · Academic email preferred</p>
+          <p className="mt-12 text-2xl font-serif text-zinc-800">
+            No credit card required · Academic email preferred
+          </p>
         </div>
       </section>
     </div>
+  )
+}
+
+function ToolCard({ icon, title, description, path }: { icon: string, title: string, description: string, path: string }) {
+  return (
+    <Link to={path} className="group h-[500px] w-full [perspective:1000px]">
+      <div className="relative h-full w-full rounded-[40px] transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+        {/* Front Face */}
+        <div className="absolute inset-0 h-full w-full rounded-[40px] border border-black/20 bg-white/30 backdrop-blur-md flex flex-col items-center justify-center gap-12 p-12 [backface-visibility:hidden]">
+          <div className="w-40 h-40 flex items-center justify-center transition-transform group-hover:scale-110">
+            <img src={icon} alt={title} className="w-full h-full object-contain" />
+          </div>
+          <h3 className="text-3xl font-serif flex items-center gap-4 text-black">
+            {title} <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
+          </h3>
+        </div>
+
+        {/* Back Face */}
+        <div className="absolute inset-0 h-full w-full rounded-[40px] bg-zinc-800 p-12 text-white flex items-center justify-center text-center [transform:rotateY(180deg)] [backface-visibility:hidden]">
+          <p className="text-3xl font-serif leading-relaxed px-4">
+            {description}
+          </p>
+        </div>
+      </div>
+    </Link>
+  )
+}
+
+function ZNode({ label, x, y, path, position }: { label: string, x: number, y: number, path: string, position: 'top-right' | 'bottom-left' }) {
+  const labelStyles = {
+    'top-right': 'bottom-full mb-2 left-0 -translate-y-2',
+    'bottom-left': 'top-full mt-2 right-0 translate-y-2 text-right',
+  };
+
+  return (
+    <Link
+      to={path}
+      className="absolute group z-20 cursor-pointer transition-all duration-[2000ms] ease-in-out flex items-center justify-center w-4 h-4"
+      style={{ left: `${x}px`, top: `${y}px` }}
+    >
+      <div className="w-4 h-4 bg-black rounded-full transition-transform group-hover:scale-150 shadow-[0_0_0_8px_rgba(0,0,0,0.05)] flex-shrink-0" />
+      <span className={`absolute whitespace-nowrap text-[40px] font-serif text-black opacity-90 transition-opacity group-hover:opacity-100 ${labelStyles[position]}`}>
+        {label}
+      </span>
+    </Link>
   )
 }

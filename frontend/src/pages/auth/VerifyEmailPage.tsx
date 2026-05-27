@@ -32,55 +32,52 @@ export function VerifyEmailPage() {
   }, [token])
 
   return (
-    <div className="flex min-h-[90vh] flex-col items-center justify-center p-4">
-      <div className="mb-6 flex flex-col items-center">
-        <Link to="/">
-          <img src="/zosterix.svg" alt="Zosterix" className="h-36 w-auto" />
-        </Link>
-      </div>
-      <Card className="w-full max-w-[480px] text-center border-none shadow-none">
-        <CardContent>
+    <div className="flex min-h-[70vh] flex-col items-center justify-center p-6 grid-bg font-serif">
+      <div className="w-full max-w-[500px] text-center bg-white/40 backdrop-blur-xl border border-black/5 p-12 rounded-[3.5rem] shadow-2xl">
+        <div className="flex flex-col items-center space-y-8">
           {status === 'loading' && (
-            <div className="flex flex-col items-center gap-4">
-              <Loader2 className="h-12 w-12 animate-spin text-zinc-300" />
-              <CardTitle className="text-2xl font-black tracking-tighter">Verifying your email...</CardTitle>
+            <div className="flex flex-col items-center gap-6">
+              <Loader2 className="h-16 w-16 animate-spin text-zinc-300" strokeWidth={1} />
+              <h1 className="text-4xl font-normal tracking-tight uppercase">Decrypting link...</h1>
             </div>
           )}
 
           {status === 'success' && (
-            <div className="flex flex-col items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-zinc-50">
-                <CheckCircle2 className="h-10 w-10 text-black" />
+            <div className="flex flex-col items-center gap-8">
+              <div className="flex h-24 w-24 items-center justify-center rounded-[2rem] bg-black text-white shadow-2xl">
+                <CheckCircle2 className="h-12 w-12" strokeWidth={1} />
               </div>
-              <CardTitle className="text-2xl font-black tracking-tighter">Email verified!</CardTitle>
-              <CardDescription className="text-zinc-500">
-                Your email has been successfully verified. You can now access all features of Zosterix.
-              </CardDescription>
-              <Link to="/login" className="w-full mt-4">
-                <Button className="w-full rounded-xl py-6 font-bold">Sign In</Button>
+              <h1 className="text-4xl font-normal tracking-tight uppercase">Email verified</h1>
+              <p className="text-zinc-500 text-xl italic leading-relaxed">
+                "Your academic profile has been successfully activated. Welcome to the collective."
+              </p>
+              <Link to="/login" className="w-full">
+                <Button className="w-full rounded-2xl py-8 text-xl font-serif bg-[#444] hover:bg-black text-white shadow-xl transition-all">Sign In</Button>
               </Link>
             </div>
           )}
 
           {status === 'error' && (
-            <div className="flex flex-col items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
-                <XCircle className="h-10 w-10 text-red-500" />
+            <div className="flex flex-col items-center gap-8">
+              <div className="flex h-24 w-24 items-center justify-center rounded-[2rem] bg-red-50 border border-red-100">
+                <XCircle className="h-12 w-12 text-red-500" strokeWidth={1} />
               </div>
-              <CardTitle className="text-2xl font-black tracking-tighter">Verification failed</CardTitle>
-              <CardDescription className="text-zinc-500">{message}</CardDescription>
-              <div className="grid grid-cols-1 gap-2 w-full mt-4">
+              <h1 className="text-4xl font-normal tracking-tight uppercase text-red-900">Link Invalid</h1>
+              <p className="text-zinc-500 text-xl italic leading-relaxed">
+                "{message}"
+              </p>
+              <div className="grid grid-cols-1 gap-4 w-full">
                 <Link to="/register">
-                  <Button variant="outline" className="w-full rounded-xl py-6 font-bold">Try Registering Again</Button>
+                  <Button className="w-full rounded-2xl py-8 text-xl font-serif bg-[#444] hover:bg-black text-white shadow-xl transition-all">Request New Profile</Button>
                 </Link>
-                <Link to="/login">
-                  <Button variant="link" className="font-bold">Back to Login</Button>
+                <Link to="/login" className="text-zinc-400 hover:text-black font-serif italic text-lg py-4">
+                  Back to Sign In
                 </Link>
               </div>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

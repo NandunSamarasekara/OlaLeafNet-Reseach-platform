@@ -62,49 +62,39 @@ export function LoginPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-white px-6">
-      {/* Back Button */}
-      <Link 
-        to="/" 
-        className="absolute left-6 top-6 md:left-12 md:top-12 flex items-center gap-2 text-sm font-bold text-zinc-400 hover:text-black transition-colors"
-      >
-        <ArrowLeft size={18} />
-        <span>Back to Home</span>
-      </Link>
-
-      <div className="w-full max-w-[440px]">
-        <div className="mb-6 text-center flex flex-col items-center">
-          <Link to="/">
-            <img src="/zosterix.svg" alt="Zosterix" className="h-36 w-auto" />
-          </Link>
-          <h1 className="mt-4 text-3xl font-black tracking-tighter">Welcome back</h1>
-          <p className="mt-2 text-zinc-500 font-medium">Continue your research journey.</p>
+    <div className="relative flex min-h-[80vh] items-center justify-center grid-bg font-serif py-20">
+      <div className="w-full max-w-[480px] bg-white/40 backdrop-blur-xl border border-black/5 rounded-[3rem] p-12 shadow-2xl shadow-black/5">
+        <div className="mb-10 text-center">
+          <h1 className="text-5xl font-normal tracking-tight uppercase">Welcome back</h1>
+          <p className="mt-4 text-zinc-500 text-xl italic leading-relaxed px-4">
+            "Continue your research journey."
+          </p>
         </div>
 
         {error && (
-          <Alert variant="destructive" className="mb-8 rounded-2xl border-red-50 bg-red-50/10">
-            <AlertDescription className="font-bold">{error}</AlertDescription>
+          <Alert variant="destructive" className="mb-8 rounded-2xl border-red-100 bg-red-50/50">
+            <AlertDescription className="font-bold text-red-800">{error}</AlertDescription>
           </Alert>
         )}
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">Email Address</FormLabel>
+                <FormItem className="space-y-3">
+                  <FormLabel className="text-[11px] font-bold uppercase tracking-[0.3em] text-black pl-4">Academic Email</FormLabel>
                   <FormControl>
                     <Input 
-                      placeholder="amal@example.com" 
+                      placeholder="researcher@university.edu" 
                       type="email" 
-                      className="rounded-2xl border-zinc-100 bg-zinc-50 px-4 py-7 focus:bg-white transition-all" 
+                      className="rounded-2xl border-black/5 bg-white px-6 py-8 text-lg font-serif transition-all focus:ring-2 focus:ring-black/5" 
                       {...field} 
                       autoFocus 
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="pl-4" />
                 </FormItem>
               )}
             />
@@ -113,49 +103,49 @@ export function LoginPage() {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
-                  <div className="flex items-center justify-between">
-                    <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">Password</FormLabel>
-                    <Link to="/forgot-password" title="Forgot password?" className="text-xs font-bold text-zinc-400 hover:text-black">
-                      Forgot?
+                <FormItem className="space-y-3">
+                  <div className="flex items-center justify-between px-4">
+                    <FormLabel className="text-[11px] font-bold uppercase tracking-[0.3em] text-black">Security Vault Key</FormLabel>
+                    <Link to="/forgot-password" title="Forgot password?" className="text-[11px] font-bold text-zinc-300 hover:text-black transition-colors">
+                      FORGOT?
                     </Link>
                   </div>
                   <FormControl>
                     <div className="relative">
                       <Input
                         type={showPassword ? 'text' : 'password'}
-                        className="rounded-2xl border-zinc-100 bg-zinc-50 px-4 py-7 pr-12 focus:bg-white transition-all"
+                        className="rounded-2xl border-black/5 bg-white px-6 py-8 pr-16 text-lg font-serif transition-all focus:ring-2 focus:ring-black/5"
                         {...field}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-black transition-colors"
+                        className="absolute right-6 top-1/2 -translate-y-1/2 text-zinc-300 hover:text-black transition-colors"
                       >
-                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                        {showPassword ? <EyeOff size={22} strokeWidth={1.5} /> : <Eye size={22} strokeWidth={1.5} />}
                       </button>
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="pl-4" />
                 </FormItem>
               )}
             />
 
-            <Button type="submit" disabled={isLoading} className="w-full rounded-2xl py-8 text-lg font-black tracking-tight">
-              {isLoading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : 'Sign In'}
+            <Button type="submit" disabled={isLoading} className="w-full rounded-2xl py-8 text-xl font-serif bg-[#444] hover:bg-black text-white shadow-xl hover:shadow-2xl transition-all">
+              {isLoading ? <Loader2 className="mr-2 h-6 w-6 animate-spin" /> : 'Enter Platform'}
             </Button>
           </form>
         </Form>
 
-        <div className="my-10 flex items-center gap-4">
-          <Separator className="flex-1 bg-zinc-100" />
-          <span className="text-xs font-bold uppercase tracking-widest text-zinc-300">Or continue with</span>
-          <Separator className="flex-1 bg-zinc-100" />
+        <div className="my-12 flex items-center gap-6">
+          <div className="flex-1 h-px bg-black/5" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-black whitespace-nowrap">OR IDENTIFY VIA</span>
+          <div className="flex-1 h-px bg-black/5" />
         </div>
 
         <Button
           variant="outline"
-          className="w-full rounded-2xl py-8 text-lg font-bold border-zinc-100 hover:bg-zinc-50 transition-all"
+          className="w-full rounded-2xl py-8 text-lg font-serif border-black/5 bg-white text-black hover:bg-black hover:text-white transition-all shadow-sm hover:shadow-xl"
           onClick={() => window.location.href = `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/auth/google`}
         >
           <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
@@ -176,12 +166,12 @@ export function LoginPage() {
               d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
             />
           </svg>
-          Google
+          Google Academic
         </Button>
 
-        <p className="mt-10 text-center text-sm font-medium text-zinc-500">
-          New to Zosterix?{' '}
-          <Link to="/register" className="font-black text-black hover:underline decoration-2 underline-offset-4">Create an account</Link>
+        <p className="mt-12 text-center text-lg font-serif">
+          <span className="text-zinc-400 italic">New to Zosterix?</span>{' '}
+          <Link to="/register" className="font-bold text-black hover:underline decoration-1 underline-offset-8">Create Account</Link>
         </p>
       </div>
     </div>
